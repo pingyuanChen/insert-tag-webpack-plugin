@@ -1,4 +1,6 @@
-var fs = require('fs');
+var fs      = require('fs');
+var path    = require('path');
+var _       = require('lodash');
 var Promise = require('bluebird');
 Promise.promisifyAll(fs);
 
@@ -11,7 +13,7 @@ InsertTagWebpackPlugin.prototype.apply = function(compiler){
     options = self.options;
   compiler.plugin('emit', function(compilation, compileCallback){
     var webpackStatsJson = compilation.getStats().toJson(),
-      filename = options.filename,
+      filename = path.resolve(process.cwd(), options.filename),
       chunks = options.chunks || [];
 
     fs.readFileAsync(filename, 'utf8')
@@ -19,12 +21,13 @@ InsertTagWebpackPlugin.prototype.apply = function(compiler){
         var htmlWebpackPluginFiles = self.htmlWebpackPluginAssets(compilation, webpackStatsJson, options.chunks, options.excludeChunks),
           html = self.insertTagIntoHtml(htmlContent, htmlWebpackPluginFiles);
 
-        fs.writeFileASync(filename, html, 'utf8')
+        fs.writeFileAsync(filename, html, 'utf8')
           .catch(function(){
             return Promise.reject(new Error('InsertTagWebpackPlugin: Unable to write HTML template "' + filename + '"'));
           });
       })
-      .catch(function(){
+      .catch(function(e){
+        console.dir(e);
         return Promise.reject(new Error('InsertTagWebpackPlugin: Unable to read HTML template "' + filename + '"'));
       });
   });
