@@ -118,6 +118,8 @@ InsertTagWebpackPlugin.prototype.insertTagIntoHtml = function(html, htmlWebpackP
   return html;
 };
 
+module.exports = InsertTagWebpackPlugin;
+
 
 
 
