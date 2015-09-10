@@ -14,6 +14,7 @@ InsertTagWebpackPlugin.prototype.apply = function(compiler){
   compiler.plugin('emit', function(compilation, compileCallback){
     var webpackStatsJson = compilation.getStats().toJson(),
       filename = path.resolve(process.cwd(), options.filename),
+      destname = path.resolve(process.cwd(), options.destname),
       chunks = options.chunks || [];
 
     fs.readFileAsync(filename, 'utf8')
@@ -21,9 +22,9 @@ InsertTagWebpackPlugin.prototype.apply = function(compiler){
         var htmlWebpackPluginFiles = self.htmlWebpackPluginAssets(compilation, webpackStatsJson, options.chunks, options.excludeChunks),
           html = self.insertTagIntoHtml(htmlContent, htmlWebpackPluginFiles);
 
-        fs.writeFileAsync(filename, html, 'utf8')
+        fs.writeFileAsync(destname, html, 'utf8')
           .catch(function(){
-            return Promise.reject(new Error('InsertTagWebpackPlugin: Unable to write HTML template "' + filename + '"'));
+            return Promise.reject(new Error('InsertTagWebpackPlugin: Unable to write HTML template "' + destname + '"'));
           });
       })
       .catch(function(e){
