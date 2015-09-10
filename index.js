@@ -21,7 +21,7 @@ InsertTagWebpackPlugin.prototype.apply = function(compiler){
 
         fs.writeFileASync(filename, html, 'utf8')
           .catch(function(){
-            return Promise.reject(new Error('InsertTagWebpackPlugin: Unable to write HTML template "' + filename + '"'));))
+            return Promise.reject(new Error('InsertTagWebpackPlugin: Unable to write HTML template "' + filename + '"'));
           });
       })
       .catch(function(){
