@@ -1,6 +1,6 @@
 {
   "name": "insert-tag-webpack-plugin",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Insert script or link tag to HTML",
   "main": "index.js",
   "scripts": {

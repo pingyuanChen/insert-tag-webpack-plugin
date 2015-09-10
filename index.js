@@ -30,7 +30,8 @@ InsertTagWebpackPlugin.prototype.apply = function(compiler){
       .catch(function(e){
         console.dir(e);
         return Promise.reject(new Error('InsertTagWebpackPlugin: Unable to read HTML template "' + filename + '"'));
-      });
+      })
+      .finally(compileCallback);
   });
 };
 
