@@ -1,0 +1,29 @@
+{
+  "name": "insert-tag-webpack-plugin",
+  "version": "1.0.0",
+  "description": "Insert script or link tag to HTML",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pingyuanChen/insert-tag-webpack-plugin.git"
+  },
+  "keywords": [
+    "webpack",
+    "plugin",
+    "html",
+    "insert",
+    "script"
+  ],
+  "author": "pychen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pingyuanChen/insert-tag-webpack-plugin/issues"
+  },
+  "homepage": "https://github.com/pingyuanChen/insert-tag-webpack-plugin",
+  "dependencies": {
+    "bluebird": "^2.10.0"
+  }
+}
