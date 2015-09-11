@@ -2,6 +2,7 @@ var fs      = require('fs');
 var path    = require('path');
 var _       = require('lodash');
 var Promise = require('bluebird');
+var file    = require('./file');
 Promise.promisifyAll(fs);
 
 function InsertTagWebpackPlugin(options){
@@ -22,10 +23,7 @@ InsertTagWebpackPlugin.prototype.apply = function(compiler){
         var htmlWebpackPluginFiles = self.htmlWebpackPluginAssets(compilation, webpackStatsJson, options.chunks, options.excludeChunks),
           html = self.insertTagIntoHtml(htmlContent, htmlWebpackPluginFiles);
 
-        fs.writeFileAsync(destname, html, 'utf8')
-          .catch(function(){
-            return Promise.reject(new Error('InsertTagWebpackPlugin: Unable to write HTML template "' + destname + '"'));
-          });
+        file.write(destname, html);
       })
       .catch(function(e){
         console.dir(e);
